@@ -7,6 +7,13 @@ const fs = require('fs');
 const path = require('path');
 const FB = require('fb');
 
+var bodyParser = require('body-parser');
+
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
 // function createFromPath(srcpath) {
 // 	return fs.readdirSync(srcpath)
 // 		.filter(function (file) {
@@ -62,9 +69,9 @@ app.get('/initialize', function (req, res) {
 	res.send(JSON.stringify(pages.slice(0, NUM_LOAD_WIDGET)));
 });
 
-app.get('/:page/result/', function (req, res) {
-	console.log(req.data);
-	FB.api('me', { fields: 'id,name', access_token: req.data.token }, function (data) {
+app.post('/:page', function (req, res) {
+
+	FB.api('me', { fields: 'id,name', access_token: req.body.token }, function (data) {
 		console.log(data);
 		res.send(data);
 	});

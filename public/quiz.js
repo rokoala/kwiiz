@@ -1,7 +1,7 @@
 var kwiiz = {
   getResult: function (app,token) {
     $.ajax({
-      url: "result",
+      url: "",
       dataType: "JSON",
       type: "POST",
       data: {
