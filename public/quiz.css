@@ -1,0 +1,11 @@
+.w-big{
+  width: 600px;
+  height: 500px;
+}
+
+@media(max-width:750px){
+  .w-big{
+    width:100%;
+    height:300px;
+  }
+}
