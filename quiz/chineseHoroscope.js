@@ -4,7 +4,8 @@ var ChineseHoroscope = function(birthday) {
 };
 
 ChineseHoroscope.prototype.getResultImagePath = function(){
-  return "results/" + this.animals[(this.birthday % this.animals.length)] + ".jpg";
+  var year = this.birthday.split('/')[2];
+  return "results/" + this.animals[(year % this.animals.length)] + ".jpg";
 };
 
 module.exports = ChineseHoroscope;
