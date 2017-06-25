@@ -1,11 +1,10 @@
 var kwiiz = {
-  getResult: function (app,token) {
+  getResult: function (token) {
     $.ajax({
       url: "",
       dataType: "JSON",
       type: "POST",
       data: {
-        app:app,
         token: token
       },
       timeout: 9000,

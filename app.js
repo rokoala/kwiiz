@@ -71,7 +71,7 @@ app.get('/initialize', function (req, res) {
 
 app.post('/:page', function (req, res) {
 
-	FB.api('me', { fields: 'id,name', access_token: req.body.token }, function (data) {
+	FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
 		console.log(data);
 		res.send(data);
 	});
