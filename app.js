@@ -24,15 +24,15 @@ const pageData = {
 	"descubra-seu-signo-chines": {
 		imgPath: "/images/descubra-seu-signo-chines.jpg",
 		title: "Descubra o seu signo chinês",
-		result: function (data) {
+		solve: function (data) {
 			var chineseHoroscope = new ChineseHoroscope(data.birthday);
-			return chineseHoroscope.resolve();
+			return chineseHoroscope.getResultImagePath();
 		}
 	},
 	"qual-sera-o-melhor-ano-da-sua-vida": {
 		imgPath: "/images/ano-vida.jpg",
 		title: "Qual será o melhor ano da sua vida?",
-		result: function (data) {
+		solve: function (data) {
 
 		}
 	}
@@ -61,8 +61,8 @@ app.get('/initialize', function (req, res) {
 
 app.post('/:page', function (req, res) {
 		FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
-		var result = pageData[req.params.quiz].resolve(data);
-		res.send(JSON.stringify({ image: result }))
+		var img = pageData[req.params.page].solve(data);
+		res.end(JSON.stringify({ image: img }))
 	});
 })
 

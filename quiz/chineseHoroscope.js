@@ -3,7 +3,7 @@ var ChineseHoroscope = function(birthday) {
   this.birthday = birthday;
 };
 
-ChineseHoroscope.prototype.getResultPath = function(){
+ChineseHoroscope.prototype.getResultImagePath = function(){
   return "results/" + this.animals[(this.birthday % this.animals.length)] + ".jpg";
 };
 
