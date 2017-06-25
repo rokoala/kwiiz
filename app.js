@@ -3,8 +3,9 @@ const NUM_LOAD_WIDGET = 20;
 const express = require('express');
 const app = express();
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
+const FB = require('fb');
 
 // function createFromPath(srcpath) {
 // 	return fs.readdirSync(srcpath)
@@ -28,35 +29,23 @@ const path = require('path')
 app.set('view engine', 'pug');
 
 var pages = [];
-// const pages = [
-// 	{
-// 		title: "Descubra o seu signo chinês",
-// 		path: "/descubra-seu-signo-chines",
-// 		imgPath: "/images/descubra-seu-signo-chines.jpg"
-// 	},
-// 	{
-// 		title: "Qual será o melhor ano da sua vida?",
-// 		path: "/qual-sera-o-melhor-ano-da-sua-vida",
-// 		imgPath: "/images/ano-vida.jpg"
-// 	}
-// ];
 
 const pageData = {
 	"descubra-seu-signo-chines": {
 		imgPath: "/images/descubra-seu-signo-chines.jpg",
-		title:"Descubra o seu signo chinês"
+		title: "Descubra o seu signo chinês"
 	},
-	"qual-sera-o-melhor-ano-da-sua-vida":{
-		imgPath:"/images/ano-vida.jpg",
-		title:"Qual será o melhor ano da sua vida?"
+	"qual-sera-o-melhor-ano-da-sua-vida": {
+		imgPath: "/images/ano-vida.jpg",
+		title: "Qual será o melhor ano da sua vida?"
 	}
 }
 
-for(key in pageData){
+for (key in pageData) {
 	pages.push({
-		title:pageData[key].title,
-		path:key,
-		imgPath:pageData[key].imgPath
+		title: pageData[key].title,
+		path: key,
+		imgPath: pageData[key].imgPath
 	})
 }
 
@@ -73,6 +62,13 @@ app.get('/initialize', function (req, res) {
 	res.send(JSON.stringify(pages.slice(0, NUM_LOAD_WIDGET)));
 });
 
+app.get('/:page/result/', function (req, res) {
+	console.log(req.data);
+	FB.api('me', { fields: 'id,name', access_token: req.data.token }, function (data) {
+		console.log(data);
+		res.send(data);
+	});
+})
 
 app.get('/:quiz', function (req, res) {
 	res.render('quiz', { data: pageData[req.params.quiz] })
