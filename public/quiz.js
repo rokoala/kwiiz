@@ -31,7 +31,7 @@ $(document).ready(function () {
       if (response.authResponse) {
         kwiiz.getResult(response.authResponse.accessToken);
       }
-    }, { scope: 'email, public_profile, user_friends' });
+    }, { scope: 'email, public_profile, user_birthday, user_friends' });
   });
 
   $div.append($title);

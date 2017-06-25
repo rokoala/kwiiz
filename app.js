@@ -7,31 +7,14 @@ const fs = require('fs');
 const path = require('path');
 const FB = require('fb');
 
+var ChineseHoroscope = require('./quiz/chineseHoroscope');
+
 var bodyParser = require('body-parser');
 
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
-
-// function createFromPath(srcpath) {
-// 	return fs.readdirSync(srcpath)
-// 		.filter(function (file) {
-// 			return fs.lstatSync(path.join(srcpath, file)).isDirectory()
-// 		})
-// 		.map(function (file, index) {
-// 			var _path = path.join(srcpath, file)
-// 			var data = fs.readFileSync(path.join(_path, 'content.txt'), 'utf8')
-
-// 			return {
-// 				id: index,
-// 				title: data,
-// 				path: _path.replace(/\\/g, "/").replace('public', '')
-// 			};
-// 		})
-// }
-
-// const pages = createFromPath('public');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 app.set('view engine', 'pug');
 
@@ -40,11 +23,18 @@ var pages = [];
 const pageData = {
 	"descubra-seu-signo-chines": {
 		imgPath: "/images/descubra-seu-signo-chines.jpg",
-		title: "Descubra o seu signo chinês"
+		title: "Descubra o seu signo chinês",
+		result: function (data) {
+			var chineseHoroscope = new ChineseHoroscope(data.birthday);
+			return chineseHoroscope.resolve();
+		}
 	},
 	"qual-sera-o-melhor-ano-da-sua-vida": {
 		imgPath: "/images/ano-vida.jpg",
-		title: "Qual será o melhor ano da sua vida?"
+		title: "Qual será o melhor ano da sua vida?",
+		result: function (data) {
+
+		}
 	}
 }
 
@@ -70,10 +60,9 @@ app.get('/initialize', function (req, res) {
 });
 
 app.post('/:page', function (req, res) {
-
-	FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
-		console.log(data);
-		res.send(data);
+		FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
+		var result = pageData[req.params.quiz].resolve(data);
+		res.send(JSON.stringify({ image: result }))
 	});
 })
 
