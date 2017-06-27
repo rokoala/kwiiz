@@ -3,6 +3,7 @@ const NUM_LOAD_WIDGET = 20;
 const express = require('express');
 const app = express();
 const pug = require('pug');
+const request = require('request');
 
 const fs = require('fs');
 const path = require('path');
@@ -31,7 +32,6 @@ function createRandomString(length) {
 	for (; str.length < length; str += Math.random().toString(36).substr(2));
 	return str.substr(0, length);
 }
-
 
 var generatePage = function (img, option) {
 
@@ -70,7 +70,7 @@ const pageData = {
 		solve: function (data) {
 
 			return new Promise(function (resolve, reject) {
-				var chineseHoroscope = new ChineseHoroscope(data.name, data.birthday);
+				var chineseHoroscope = new ChineseHoroscope('https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/12002164_10207116181093275_3968334355201663834_n.jpg?oh=858fe3390106dd53a38cae49d275c5c6&oe=59E345B9', data.name, data.birthday);
 
 				chineseHoroscope.getImage().then(function (img) {
 
@@ -120,11 +120,15 @@ app.get('/initialize', function (req, res) {
 });
 
 app.post('/:page', function (req, res) {
-	FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
-		pageData[req.params.page].solve({ token: data.token, name: data.name, birthday: data.birthday }).then(function (url) {
-			res.send(JSON.stringify({ url: url }));
-		})
-	});
+	// FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
+	// 	pageData[req.params.page].solve({ id:data.id, token: data.token, name: data.name, birthday: data.birthday, imgUrl:data.picture.data.url }).then(function (url) {
+	// 		res.send(JSON.stringify({ url: url }));
+	// 	})
+	// });
+
+	pageData[req.params.page].solve({ id:"321321",token: '321321321', name: 'rokoala koala', birthday: '22/10/1988', imgUrl:'bla' }).then(function (url) {
+		res.send(JSON.stringify({url:url}))
+	})
 })
 
 app.get('/:quiz', function (req, res) {
