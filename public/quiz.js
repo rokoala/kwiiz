@@ -67,6 +67,7 @@ $(document).ready(function () {
     FB.login(function (response) {
       if (response.authResponse) {
         kwiiz.getResult(response.authResponse.accessToken);
+        // kwiiz.getResult('test')
       }
     }, { scope: 'email, public_profile, user_birthday, user_friends' });
   });

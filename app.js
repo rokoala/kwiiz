@@ -120,7 +120,7 @@ app.get('/initialize', function (req, res) {
 });
 
 app.post('/:page', function (req, res) {
-	FB.api('me', { fields: 'id,name,birthday', access_token: req.body.token }, function (data) {
+	FB.api('me', { fields: 'id,name,birthday,picture.type(large)', access_token: req.body.token }, function (data) {
 		pageData[req.params.page].solve({ id: data.id, token: data.token, name: data.name, birthday: data.birthday, imgUrl: data.picture.data.url }).then(function (url) {
 			res.send(JSON.stringify({ url: url }));
 		})
