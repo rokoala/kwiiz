@@ -1,11 +1,57 @@
 .w-big{
-  width: 600px;
-  height: 500px;
+  width: 800px;
+  height: 600px;
 }
 
-@media(max-width:750px){
+.result{
+  width:800px;
+  margin: 25px;
+  border: 1px solid rgba(0,0,0,0.09);
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+@media(max-width:930px){
   .w-big{
     width:100%;
     height:300px;
   }
+
+  .result{
+    width: 100%;
+  }
+}
+
+.btn-facebook {
+    -webkit-transition: all 0.15s cubic-bezier(0.22,0.42,0.30,0.44);
+    -moz-transition: all 0.15s cubic-bezier(0.22,0.42,0.30,0.44);
+    transition: all 0.15s cubic-bezier(0.22,0.42,0.30,0.44);
+    background-color: #4469B0;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    height: 50px;
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+}
+
+.btn-facebook::before{
+    background: url(/images/fb-logo-w.png) no-repeat center center;
+    background-size: 29px 29px;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 29px;
+    left: 15px;
+    margin: auto 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+    z-index: 2;
 }

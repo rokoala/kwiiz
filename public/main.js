@@ -35,8 +35,6 @@ $(document).ready(function () {
 
 		if ($(document).height() - win.height() == win.scrollTop()) {
 
-			console.log("load...")
-
 			var lastId = $("#content").children("a").last().attr("id");
 
 			$.ajax({
