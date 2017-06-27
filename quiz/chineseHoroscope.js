@@ -19,7 +19,7 @@ ChineseHoroscope.prototype.getImage = function () {
       Jimp.read('results/chinesehoroscope/' + image).then(function (img) {
         var clone = img.clone();
         //Jimp.loadFont(Jimp.FONT_SANS_64_WHITE).then(function (font) {
-          clone.composite(fbImg,205,270)
+          clone.composite(fbImg,205,20);
           resolve(clone);
         //});
       }).catch(function (err) {

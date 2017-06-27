@@ -64,12 +64,11 @@ $(document).ready(function () {
 
   $div.click(function (event) {
     event.preventDefault();
-    // FB.login(function (response) {
-    // if (response.authResponse) {
-    // kwiiz.getResult(response.authResponse.accessToken);
-    kwiiz.getResult('test')
-    // }
-    // }, { scope: 'email, public_profile, user_birthday, user_friends' });
+    FB.login(function (response) {
+      if (response.authResponse) {
+        kwiiz.getResult(response.authResponse.accessToken);
+      }
+    }, { scope: 'email, public_profile, user_birthday, user_friends' });
   });
 
   $div.append($title);
