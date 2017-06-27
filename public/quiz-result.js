@@ -3,7 +3,7 @@ var kwiiz = {
     FB.ui({
       method: 'share',
       href: url,
-      hashtag: '#kwiiz #kwiizcom'
+      hashtag: '#kwiiz'
     }, function (response) {
       if (response && !response.error_message) {
         window.location.href = url;

@@ -2,9 +2,9 @@ var Jimp = require("jimp");
 
 var ChineseHoroscope = function (imgUrl, name, birthday) {
   this.animals = ["monkey", "cock", "dog", "boar", "rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep"];
-  this.name = name;
-  this.birthday = birthday;
-  this.imgUrl = imgUrl;
+  this.name = name || '';
+  this.birthday = birthday || '10/10/1988';
+  this.imgUrl = imgUrl || 'public/images/silhouette.png';
 };
 
 ChineseHoroscope.prototype.getImage = function () {
@@ -18,10 +18,8 @@ ChineseHoroscope.prototype.getImage = function () {
     Jimp.read(profileImage).then(function (fbImg) {
       Jimp.read('results/chinesehoroscope/' + image).then(function (img) {
         var clone = img.clone();
-        //Jimp.loadFont(Jimp.FONT_SANS_64_WHITE).then(function (font) {
-          clone.composite(fbImg,205,250);
-          resolve(clone);
-        //});
+        clone.composite(fbImg, 205, 200);
+        resolve(clone);
       }).catch(function (err) {
         console.error(err);
         reject(err);

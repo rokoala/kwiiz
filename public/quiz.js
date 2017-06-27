@@ -1,9 +1,10 @@
 var loadCircle = null;
 
 var kwiiz = {
-  getResult: function (token) {
+  getResult: function (appUrl, token) {
+    console.log(appUrl);
     $.ajax({
-      url: "",
+      url: appUrl,
       dataType: "JSON",
       type: "POST",
       data: {
@@ -45,6 +46,10 @@ var kwiiz = {
 
         circle.animate(0.5);
       },
+      error:function(err){
+        var $h1 = $("<h1/>").text("Erro ao processar perfil, por favor tente novamente mais tarde...").css("margin","50px");
+         $("div.result").children().remove().append($h1);
+      },
       success: function (data) {
 
         $("div.result").children("h4").text("Calculando seu resultado...");
@@ -66,8 +71,8 @@ $(document).ready(function () {
     event.preventDefault();
     FB.login(function (response) {
       if (response.authResponse) {
-        kwiiz.getResult(response.authResponse.accessToken);
-        // kwiiz.getResult('test')
+        kwiiz.getResult$("div.container").attr("app-url"),(response.authResponse.accessToken);
+        // kwiiz.getResult($("div.container").attr("app-url"),'test')
       }
     }, { scope: 'email, public_profile, user_birthday, user_friends' });
   });
