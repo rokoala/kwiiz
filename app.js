@@ -162,21 +162,21 @@ app.post('/:page', function (req, res) {
 app.get('/:quiz/results/:result', function (req, res) {
 	var cookie = req.session.cookieName;
 	var userAgent = req.headers["user-agent"];
-	var isFb = userAgent.indexOf("facebookexternalhit") !== -1 ? true : false; 
+	var isFb = userAgent.indexOf("facebookexternalhit") !== -1 ? true : false;
 
-	if(!!cookie || isFb){
-		
-		var file = __dirname + '/client_results/' + req.params.quiz + "/" + cookie + "-" + req.params.result;
+	if (!!cookie || isFb) {
 
-		if(isFb)
+		var file = __dirname + '/client_results/' + req.params.quiz + "/" + req.params.result;
+
+		if (isFb)
 			res.sendFile(file)
 
-		var key = __dirname + '/client_results/' + req.params.quiz + "/" + req.params.result.split('.')[0] + ".key";
+		var key = __dirname + '/client_results/' + req.params.quiz + "/" + req.params.result.split('.')[0] + "-" + cookie + ".key";
 
 		if (fs.existsSync(key)) {
 			res.sendFile(file)
 		}
-	}else {
+	} else {
 		var page = pageData[req.params.quiz]
 		res.render('quiz', { data: page });
 	}
