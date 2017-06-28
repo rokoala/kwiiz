@@ -53,7 +53,7 @@ var generatePage = function (img, option) {
 
 		var randomString = createRandomString(16);
 
-		img.write('results/' + option.page + "/" + randomString + ".jpg", function (err) {
+		img.write('public/results/' + option.page + "/" + randomString + ".jpg", function (err) {
 			if (err) {
 				reject(err);
 				throw err;
@@ -63,7 +63,7 @@ var generatePage = function (img, option) {
 
 				fs.writeFileSync("client_results/" + option.page + "/" + fileName,
 					compiledResult({
-						site: ROOT_URL + option.page + "/results/" + fileName,
+						site: ROOT_URL + "/" + option.page + "/results/" + fileName,
 						img: ROOT_URL + "/results/" + option.page + "/" + randomString + ".jpg",
 						title: option.title,
 						description: option.description,
@@ -72,7 +72,7 @@ var generatePage = function (img, option) {
 
 				fs.writeFileSync("client_results/" + option.page + "/" + randomString + "-" + option.cookie + ".key", "");
 
-				resolve(ROOT_URL + option.page + "/results/" + fileName);
+				resolve(ROOT_URL + "/" + option.page + "/results/" + fileName);
 			}
 		})
 
