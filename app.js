@@ -53,7 +53,7 @@ var generatePage = function (img, option) {
 
 		var randomString = createRandomString(16);
 
-		img.write('client_results/' + option.page + "/" + randomString + ".jpg", function (err) {
+		img.write('results/' + option.page + "/" + randomString + ".jpg", function (err) {
 			if (err) {
 				reject(err);
 				throw err;
@@ -64,7 +64,7 @@ var generatePage = function (img, option) {
 				fs.writeFileSync("client_results/" + option.page + "/" + fileName,
 					compiledResult({
 						site: ROOT_URL + option.page + "/results/" + fileName,
-						img: ROOT_URL + option.page + "/results/" + randomString + ".jpg",
+						img: ROOT_URL + "/results/" + randomString + ".jpg",
 						title: option.title,
 						description: option.description,
 						name: option.name
