@@ -64,7 +64,7 @@ var generatePage = function (img, option) {
 				fs.writeFileSync("client_results/" + option.page + "/" + fileName,
 					compiledResult({
 						site: ROOT_URL + option.page + "/results/" + fileName,
-						img: ROOT_URL + "/results/" + randomString + ".jpg",
+						img: ROOT_URL + "/results/" + option.page + "/" + randomString + ".jpg",
 						title: option.title,
 						description: option.description,
 						name: option.name
