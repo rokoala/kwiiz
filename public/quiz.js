@@ -71,7 +71,7 @@ $(document).ready(function () {
     event.preventDefault();
     FB.login(function (response) {
       if (response.authResponse) {
-        kwiiz.getResult$("div.container").attr("app-url"),(response.authResponse.accessToken);
+        kwiiz.getResult($("div.container").attr("app-url"),(response.authResponse.accessToken));
         // kwiiz.getResult($("div.container").attr("app-url"),'test')
       }
     }, { scope: 'email, public_profile, user_birthday, user_friends' });

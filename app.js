@@ -53,7 +53,7 @@ var generatePage = function (img, option) {
 
 		var randomString = createRandomString(16);
 
-		img.write('client_results/' + option.page + "/" + option.cookie + '-' + randomString + ".jpg", function (err) {
+		img.write('client_results/' + option.page + "/" + randomString + ".jpg", function (err) {
 			if (err) {
 				reject(err);
 				throw err;
@@ -61,7 +61,7 @@ var generatePage = function (img, option) {
 			else {
 				var fileName = randomString + ".html";
 
-				fs.writeFileSync("client_results/" + option.page + "/" + option.cookie + "-" + fileName,
+				fs.writeFileSync("client_results/" + option.page + "/" + fileName,
 					compiledResult({
 						site: ROOT_URL + option.page + "/results/" + fileName,
 						img: ROOT_URL + option.page + "/results/" + randomString + ".jpg",
@@ -69,6 +69,8 @@ var generatePage = function (img, option) {
 						description: option.description,
 						name: option.name
 					}));
+
+				fs.writeFileSync("client_results/" + option.page + "/" + randomString + "-" + option.cookie + ".key", "");
 
 				resolve(ROOT_URL + option.page + "/results/" + fileName);
 			}
@@ -159,11 +161,22 @@ app.post('/:page', function (req, res) {
 
 app.get('/:quiz/results/:result', function (req, res) {
 	var cookie = req.session.cookieName;
-	var file = __dirname + '/client_results/' + req.params.quiz + "/" + cookie + "-" + req.params.result;
+	var userAgent = req.headers["user-agent"];
+	var isFb = userAgent.indexOf("facebookexternalhit") !== -1 ? true : false; 
 
-	if (fs.existsSync(file)) {
-		res.sendFile(file)
-	} else {
+	if(!!cookie || isFb){
+		
+		var file = __dirname + '/client_results/' + req.params.quiz + "/" + cookie + "-" + req.params.result;
+
+		if(isFb)
+			res.sendFile(file)
+
+		var key = __dirname + '/client_results/' + req.params.quiz + "/" + req.params.result.split('.')[0] + ".key";
+
+		if (fs.existsSync(key)) {
+			res.sendFile(file)
+		}
+	}else {
 		var page = pageData[req.params.quiz]
 		res.render('quiz', { data: page });
 	}
