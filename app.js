@@ -63,8 +63,8 @@ var generatePage = function (img, option) {
 
 				fs.writeFileSync("client_results/" + option.page + "/" + fileName,
 					compiledResult({
-						site: ROOT_URL + "/" + option.page + "/results/" + fileName,
-						img: ROOT_URL + "/results/" + option.page + "/" + randomString + ".jpg",
+						site: ROOT_URL + option.page + "/results/" + fileName,
+						img: ROOT_URL + "results/" + option.page + "/" + randomString + ".jpg",
 						title: option.title,
 						description: option.description,
 						name: option.name
@@ -72,7 +72,7 @@ var generatePage = function (img, option) {
 
 				fs.writeFileSync("client_results/" + option.page + "/" + randomString + "-" + option.cookie + ".key", "");
 
-				resolve(ROOT_URL + "/" + option.page + "/results/" + fileName);
+				resolve(ROOT_URL + option.page + "/results/" + fileName);
 			}
 		})
 
@@ -150,13 +150,15 @@ app.post('/:page', function (req, res) {
 		})
 	});
 
-
-	// pageData[req.params.page].solve({ id: "321321", token: '321321321', name: 'rokoala koala', birthday: '22/10/1980', page: req.params.page, cookie: randomNumber }).then(function (url) {
+	// 	var randomNumber = Math.random().toString();
+	// 	randomNumber = randomNumber.substring(2, randomNumber.length);
+	// pageData[req.params.page].solve({ id: "321321", token: '321321321', name: 'rokoala koala', birthday: '22/10/1988', page: req.params.page, cookie: randomNumber }).then(function (url) {
+		
 	// 	req.session.cookie.expires = false;
 	// 	req.session.cookieName = randomNumber;
 
 	// 	res.send(JSON.stringify({ url: url }))
-	// })
+	})
 })
 
 app.get('/:quiz/results/:result', function (req, res) {
