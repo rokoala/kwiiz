@@ -3,7 +3,7 @@ var kwiiz = {
 };
 
 var createWidget = function (option) {
-	var $widget = $("<a/>").attr("id", kwiiz.id++).attr("href", option.path).addClass("widget").css({ "background": "url(" + option.imgPath + ")", "background-size": "cover" });
+	var $widget = $("<a/>").attr("id", kwiiz.id++).attr("href", option.path).addClass("widget").css({ "background": "url(" + option.imgPath + ")", "background-size": "cover", "background-position-x":"50%", "background-position-y":"50%"});
 	var $title = $("<h5/>").text(option.title);
 
 	$widget.append($title);
