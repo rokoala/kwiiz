@@ -11,7 +11,6 @@ ChineseHoroscope.prototype.getImage = function () {
   var year = this.birthday.split('/')[2];
   var image = this.animals[(year % this.animals.length)] + ".jpg";
   var profileImage = this.imgUrl;
-  var message = this.name + " seu signo é:";
 
   return new Promise(function (resolve, reject) {
 

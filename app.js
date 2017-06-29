@@ -14,6 +14,7 @@ var Promise = require('promise');
 var Jimp = require('jimp');
 
 var ChineseHoroscope = require('./quiz/chineseHoroscope');
+var HouseHogwards = require('./quiz/houseHogwards');
 
 var bodyParser = require('body-parser');
 
@@ -96,6 +97,33 @@ const pageData = {
 						id: data.id,
 						title: "Qual é o seu signo chinês?",
 						description: "Venha descobrir o seu! clique aqui!",
+						name: data.name,
+						page: data.page,
+						cookie: data.cookie
+					}).then(function (url) {
+						resolve(url);
+					})
+				}).catch(function (err) {
+					reject(err);
+					throw err;
+				})
+			});
+		}
+	},
+	"qual-seria-sua-casa-em-hogwards": {
+		imgPath: "/images/qual-seria-sua-casa-em-hogwards.jpg",
+		appurl: "/qual-seria-sua-casa-em-hogwards",
+		title: "Qual seria sua casa em hogwards?",
+		solve: function (data) {
+			return new Promise(function (resolve, reject) {
+				var houseHogwards = new HouseHogwards(data.imgUrl, data.name, data.birthday);
+
+				houseHogwards.getImage().then(function (img) {
+
+					generatePage(img, {
+						id: data.id,
+						title: "Qual seria sua casa em hogwards?",
+						description: "Venha descobrir qual seria a sua! clique aqui!",
 						name: data.name,
 						page: data.page,
 						cookie: data.cookie
