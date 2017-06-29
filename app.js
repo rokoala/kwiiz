@@ -140,26 +140,26 @@ app.get('/initialize', function (req, res) {
 
 app.post('/:page', function (req, res) {
 
-	// FB.api('me', { fields: 'id,name,birthday,picture.type(large)', access_token: req.body.token }, function (data) {
-	// 	var randomNumber = Math.random().toString();
-	// 	randomNumber = randomNumber.substring(2, randomNumber.length);
+	FB.api('me', { fields: 'id,name,birthday,picture.type(large)', access_token: req.body.token }, function (data) {
+		var randomNumber = Math.random().toString();
+		randomNumber = randomNumber.substring(2, randomNumber.length);
 
-	// 	pageData[req.params.page].solve({ id: data.id, token: data.token, name: data.name, birthday: data.birthday, imgUrl: data.picture.data.url, page: req.params.page, cookie: randomNumber }).then(function (url) {
-	// 		req.session.cookie.expires = false;
-	// 		req.session.cookieName = randomNumber;
-	// 		res.send(JSON.stringify({ url: url }));
-	// 	})
-	// });
+		pageData[req.params.page].solve({ id: data.id, token: data.token, name: data.name, birthday: data.birthday, imgUrl: data.picture.data.url, page: req.params.page, cookie: randomNumber }).then(function (url) {
+			req.session.cookie.expires = false;
+			req.session.cookieName = randomNumber;
+			res.send(JSON.stringify({ url: url }));
+		})
+	});
 
-	var randomNumber = Math.random().toString();
-	randomNumber = randomNumber.substring(2, randomNumber.length);
-	pageData[req.params.page].solve({ id: "321321", token: '321321321', name: 'rokoala koala', birthday: '22/10/1988', page: req.params.page, cookie: randomNumber }).then(function (url) {
+	// var randomNumber = Math.random().toString();
+	// randomNumber = randomNumber.substring(2, randomNumber.length);
+	// pageData[req.params.page].solve({ id: "321321", token: '321321321', name: 'rokoala koala', birthday: '22/10/1988', page: req.params.page, cookie: randomNumber }).then(function (url) {
 
-		req.session.cookie.expires = false;
-		req.session.cookieName = randomNumber;
+	// 	req.session.cookie.expires = false;
+	// 	req.session.cookieName = randomNumber;
 
-		res.send(JSON.stringify({ url: url }))
-	})
+	// 	res.send(JSON.stringify({ url: url }))
+	// })
 })
 
 app.get('/:quiz/results/:result', function (req, res) {
