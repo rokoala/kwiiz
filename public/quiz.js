@@ -15,8 +15,8 @@ var kwiiz = {
 
         $("div.widget").remove();
 
-        var $load = $("<div/>").attr("id", "load-progress").css({ "width": "350px", "margin-left": "auto", "margin-right": "auto", "padding": "40px" });
-        var $loadText = $("<h4/>").text("Analisando seu perfil...");
+        var $load = $("<div/>").attr("id", "load-progress").css({ "width": "350px", "margin-left": "auto", "margin-right": "auto"});
+        var $loadText = $("<h5/>").text("Analisando o seu perfil...");
 
         var $div = $("<div/>").addClass("result").append($load).append($loadText);
 
@@ -47,7 +47,7 @@ var kwiiz = {
         circle.animate(0.5);
       },
       error:function(err){
-        var $h1 = $("<h1/>").text("Erro ao processar perfil, por favor tente novamente mais tarde...").css("margin","50px");
+        var $h1 = $("<h1/>").text("Encontramos um problema ao processar seu perfil, por favor tente novamente.").css("margin","50px");
          $("div.result").children().remove().append($h1);
       },
       success: function (data) {
@@ -69,12 +69,12 @@ $(document).ready(function () {
 
   $div.click(function (event) {
     event.preventDefault();
-    FB.login(function (response) {
-      if (response.authResponse) {
-        kwiiz.getResult($("div.container").attr("app-url"),(response.authResponse.accessToken));
-        // kwiiz.getResult($("div.container").attr("app-url"),'test')
-      }
-    }, { scope: 'email, public_profile, user_birthday, user_friends' });
+    // FB.login(function (response) {
+    //   if (response.authResponse) {
+    //     kwiiz.getResult($("div.container").attr("app-url"),(response.authResponse.accessToken));
+         kwiiz.getResult($("div.container").attr("app-url"),'test')
+    //   }
+    // }, { scope: 'email, public_profile, user_birthday, user_friends' });
   });
 
   $div.append($title);

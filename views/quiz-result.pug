@@ -16,7 +16,7 @@ html
     meta(property="og:title" content=title)
     meta(property="og:description" content=description)
     meta(property="og:site_name" content="Kwiiz")
-    meta(property="og:locale" content="pg_BR")
+    meta(property="og:locale" content="pt_BR")
     meta(property="article:tag" content="quiz")
     meta(property="article:author" content="https://www.facebook.com/kwiizcom/")
     meta(property="article:publisher" content="https://www.facebook.com/kwiizcom/")
@@ -56,14 +56,16 @@ html
     div(class="row" style="margin:15px")
       div(class="fb-like" style="float:right" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false")
     
-    div(class="container")
+    div(class="container" app-url=appurl)
       div(id="content" class="wrapper")
         div(class="result")
           img(src=img style="width:100%")
-          h2 #{name} este é seu resultado!
-          h3 Gostou? Comente e compartilhe com seus amigos!
+          h3 #{name} este é seu resultado!
+          h4 Gostou? Comente e compartilhe com seus amigos!
           button(class="btn-facebook btn-share" data-href=site data-layout="button")
-            span Compartilhar no Facebook
+            span Compartilhar
+          a(class="button btn-retry" href=appurl)
+            span Refazer o teste
     footer
       a(href="/termos-e-privacidade.html") Termos e privacidade
       div Kwiiz
