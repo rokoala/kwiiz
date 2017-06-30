@@ -15,6 +15,7 @@ var Jimp = require('jimp');
 
 var ChineseHoroscope = require('./quiz/chineseHoroscope');
 var HouseHogwards = require('./quiz/houseHogwards');
+var BestYear = require('./quiz/bestYear');
 
 var bodyParser = require('body-parser');
 
@@ -142,7 +143,26 @@ const pageData = {
 		appurl: "/qual-sera-o-melhor-ano-da-sua-vida",
 		title: "Qual será o melhor ano da sua vida?",
 		solve: function (data) {
+			return new Promise(function (resolve, reject) {
+				var bestYear = new BestYear(data.imgUrl, data.name, data.birthday);
 
+				bestYear.getImage().then(function (img) {
+
+					generatePage(img, {
+						id: data.id,
+						title: "Qual será o melhor ano da sua vida?",
+						description: "Venha descobrir qual será o seu! clique aqui!",
+						name: data.name,
+						page: data.page,
+						cookie: data.cookie
+					}).then(function (url) {
+						resolve(url);
+					})
+				}).catch(function (err) {
+					reject(err);
+					throw err;
+				})
+			});
 		}
 	}
 }
@@ -209,7 +229,7 @@ app.get('/:quiz/results/:result', function (req, res) {
 		}
 	} else {
 		var page = pageData[req.params.quiz]
-		res.render('quiz', { data: page });
+		res.render('quiz',  page );
 	}
 });
 
@@ -217,7 +237,7 @@ app.get('/:quiz', function (req, res) {
 	var page = pageData[req.params.quiz]
 
 	if (!!page)
-		res.render('quiz', { data: page })
+		res.render('quiz', page)
 	else
 		req.next();
 })

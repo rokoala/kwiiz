@@ -5,13 +5,13 @@ html
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-    meta(name="description" content="Quiz divertidos para facebook, curiosidades do Mundo e diversos jogos. Descubra coisas que ainda não sabe!")
+    meta(name="description" content=title)
     meta(property="fb:app_id" content="1539632829441491")
-    meta(property="og:image" content="https://scontent.fcgh4-1.fna.fbcdn.net/v/t1.0-9/19260752_314757028936235_1830643228088330983_n.png?oh=e3348559aef3a78d9cd5a22293e137af&oe=59C49FFC")
-    meta(property="og:image:type" content="image/jpeg")
+    meta(property="og:image" content="https://www.kwiiz.com"+imgPath)
+    meta(property="og:image:type" content="image/jpg")
     meta(property="og:image:width" content="800")
     meta(property="og:image:height" content="420")
-    meta(property="og:url" rel="canonical" content="https://www.kwiiz.com/")
+    meta(property="og:url" rel="canonical" content="https://www.kwiiz.com"+appurl)
     meta(property="og:type" content="article")
     meta(property="og:title" content="Kwiiz")
     meta(property="og:description" content="Quiz divertidos para facebook, curiosidades do Mundo e diversos jogos. Descubra coisas que ainda não sabe!")
@@ -48,8 +48,8 @@ html
     script(src="/lib/jquery-3.2.1.min.js")
     script(src="/lib/progressbar.min.js")
     script.
-      imgPath="#{data.imgPath}";
-      title="#{data.title}"
+      imgPath="#{imgPath}";
+      title="#{title}"
     script(src="/quiz.js")
   body
     div(class="header")
@@ -60,7 +60,7 @@ html
     div(class="row" style="margin:15px")
       div(class="fb-like" style="float:right" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false")
     
-    div(class="container" app-url=data.appurl)
+    div(class="container" app-url=appurl)
       div(id="content" class="wrapper")
     footer
       a(href="/termos-e-privacidade.html") Termos e privacidade
