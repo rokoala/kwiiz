@@ -87,6 +87,7 @@ const pageData = {
 		imgPath: "/images/descubra-seu-signo-chines.jpg",
 		title: "Descubra o seu signo chinês",
 		appurl: "/descubra-seu-signo-chines",
+		description: "Venha descobrir o seu! clique aqui!",
 		solve: function (data) {
 
 			return new Promise(function (resolve, reject) {
@@ -115,6 +116,7 @@ const pageData = {
 		imgPath: "/images/qual-seria-sua-casa-em-hogwards.jpg",
 		appurl: "/qual-seria-sua-casa-em-hogwards",
 		title: "Qual seria sua casa em hogwards?",
+		description: "Venha descobrir qual seria a sua! clique aqui!",
 		solve: function (data) {
 			return new Promise(function (resolve, reject) {
 				var houseHogwards = new HouseHogwards(data.imgUrl, data.name, data.birthday);
@@ -142,6 +144,7 @@ const pageData = {
 		imgPath: "/images/ano-vida.jpg",
 		appurl: "/qual-sera-o-melhor-ano-da-sua-vida",
 		title: "Qual será o melhor ano da sua vida?",
+		description: "Venha descobrir qual será o seu! clique aqui!",
 		solve: function (data) {
 			return new Promise(function (resolve, reject) {
 				var bestYear = new BestYear(data.imgUrl, data.name, data.birthday);
