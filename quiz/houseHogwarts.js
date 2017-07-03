@@ -14,7 +14,7 @@ HouseHogwards.prototype.getImage = function () {
   return new Promise(function (resolve, reject) {
 
     Jimp.read(profileImage).then(function (fbImg) {
-      Jimp.read('results/houseHogwards/' + image).then(function (img) {
+      Jimp.read('results/houseHogwarts/' + image).then(function (img) {
         var clone = img.clone();
         clone.composite(fbImg, 108, 195);
         resolve(clone);
