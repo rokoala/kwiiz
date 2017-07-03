@@ -14,7 +14,7 @@ var Promise = require('promise');
 var Jimp = require('jimp');
 
 var ChineseHoroscope = require('./quiz/chineseHoroscope');
-var HouseHogwards = require('./quiz/houseHogwards');
+var HouseHogwarts = require('./quiz/houseHogwarts');
 var BestYear = require('./quiz/bestYear');
 
 var bodyParser = require('body-parser');
@@ -112,20 +112,20 @@ const pageData = {
 			});
 		}
 	},
-	"qual-seria-sua-casa-em-hogwards": {
-		imgPath: "/images/qual-seria-sua-casa-em-hogwards.jpg",
-		appurl: "/qual-seria-sua-casa-em-hogwards",
-		title: "Qual seria sua casa em hogwards?",
+	"qual-seria-sua-casa-em-hogwarts": {
+		imgPath: "/images/qual-seria-sua-casa-em-hogwarts.jpg",
+		appurl: "/qual-seria-sua-casa-em-hogwarts",
+		title: "Qual seria sua casa em hogwarts?",
 		description: "Venha descobrir qual seria a sua! clique aqui!",
 		solve: function (data) {
 			return new Promise(function (resolve, reject) {
-				var houseHogwards = new HouseHogwards(data.imgUrl, data.name, data.birthday);
+				var houseHogwarts = new HouseHogwarts(data.imgUrl, data.name, data.birthday);
 
-				houseHogwards.getImage().then(function (img) {
+				houseHogwarts.getImage().then(function (img) {
 
 					generatePage(img, {
 						id: data.id,
-						title: "Qual seria sua casa em hogwards?",
+						title: "Qual seria sua casa em hogwarts?",
 						description: "Venha descobrir qual seria a sua! clique aqui!",
 						name: data.name,
 						page: data.page,
