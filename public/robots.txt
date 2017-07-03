@@ -1,3 +1,4 @@
 User-agent: *
+Allow: /
 Disalow: /results/
 Disalow: /lib/
