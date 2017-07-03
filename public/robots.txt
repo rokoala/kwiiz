@@ -1,0 +1,3 @@
+User-agent: *
+Disalow: /results/
+Disalow: /lib/

@@ -16,7 +16,7 @@ HouseHogwards.prototype.getImage = function () {
     Jimp.read(profileImage).then(function (fbImg) {
       Jimp.read('results/houseHogwards/' + image).then(function (img) {
         var clone = img.clone();
-        clone.composite(fbImg, 108, 200);
+        clone.composite(fbImg, 108, 195);
         resolve(clone);
       }).catch(function (err) {
         console.error(err);
